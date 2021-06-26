@@ -28,3 +28,7 @@ speakerdf <- as.data.frame(speakertable)
 colnames(speakerdf) <- c("Speaker", "Freq")
 number_of_speakers <- length(speakerdf$Speaker)
 speakerdf <- speakerdf[order(speakerdf$Freq, decreasing = TRUE), ]
+
+# Global R Events Distribution
+satReventcountry <- satrday_country
+satReventcountry$Country <- countrycode(satReventcountry$Country, origin = 'country.name', destination = 'iso2c') 

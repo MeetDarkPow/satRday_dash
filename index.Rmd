@@ -16,6 +16,7 @@ output:
 library(flexdashboard)
 library(dplyr)
 library(DT)
+library(countrycode)
 options(DT.options = list(scrollY="250px",scrollX="50px", pageLength = 10, autoWidth = TRUE))
 library(echarts4r)
 source("satRdays.R")
@@ -67,6 +68,18 @@ valueBox(length(satrday_city$City), icon = "fa-building", color = "darkblue")
 
 ```{r}
 valueBox(length(satrday_country$Country), icon = "fa-globe", color = "darkblue")
+```
+
+Row {data-height=600}
+-----------------------------------------------------------------------
+
+### Global R Events Distribution
+```{r}
+satReventcountry %>% e_country_names(Country) %>% # helper
+  e_charts(Country) %>%
+  e_map(count) %>%
+  e_visual_map(min =0, max = max(satReventcountry$count), color = c("#ba160c","#ce5b54","#bf716c", "#e89993","#f0b5b0","#f2c5c1","#f0d9d7")) %>% e_tooltip() %>%
+  e_title("Global Distribution of Upcoming satRdays Meetup Events", "All-Time")
 ```
 
 Row {data-height=400}
